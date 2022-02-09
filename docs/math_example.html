@@ -43,9 +43,6 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
-button.code-folding-btn:focus {
-  outline: none;
-}
 </style>
 
 
@@ -79,6 +76,8 @@ $(document).ready(function () {
 <br>
 <p>Let us start with a definition
 </p>
+<p style="margin-top: 1% ;">I’ve took some time going over multiple post regarding VAE and GAN. To help myself to better understand these generative model, I decided to write a post about them, comparing them side by side. Also I want to include the necessary implementation details regarding these two models. For this model, I will use the toy dataset which is MNIST. The code in this post will be mainly implemented with Tensorflow.</p>
+
 
 <div class="definition"> A number $n$ is called even if $n\%2 = 0$. An odd number $m$ is odd if $m \%2 \neq 0$. Futhermore lets write an $m$ as $m=2q+1$ and $n$ = $n = 2p$ for $p,q\in \mathbb{R}$</div>
 
@@ -87,9 +86,6 @@ $(document).ready(function () {
 <div class="lemma">An even number plus an even number results in an even number.</div>
 <p>We can now come to our theorem.</p>
 <div class="theorem"> The sum of an odd number $m$ and an even number $n$ is always odd. </div>
-
-
-<div class="proof">Lets write $m = 2q+1$ and $n = 2p$. $\implies$ $m+n$ = $2q+2p + 1 $ = $2(p+q) + 1$. We know $2(p+q) %2 = 0$ but $1\%2 \neq0$ $ \implies$ $m+n$ must be odd.</div>
 
 <div style="text-align: center;"> $\begin{align} \sum_{n=1}^N P(X=x) \end{align}$</div>
 
