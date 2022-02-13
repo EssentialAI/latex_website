@@ -71,12 +71,93 @@ $(document).ready(function () {
   class ='links' >About</a> | <a href="research.html" class = 'links'>Research</a> | <a href="archive.html" class = 'links'>Archive</a> | <a href="https://www.github.com/EssentialAI" class = 'links' target="_blank">Code</a></div>
   <hr>
 </div>
-<p>Let us start with a definition
-</p>
-<p style="margin-top: 1% ;">I’ve took some time going over multiple post regarding VAE and GAN. To help myself to better understand these generative model, I decided to write a post about them, comparing them side by side. Also I want to include the necessary implementation details regarding these two models. For this model, I will use the toy dataset which is MNIST. The code in this post will be mainly implemented with Tensorflow.</p>
+<h2 style="margin-bottom: 0%;">Multi-Armed Bandits problem and solutions</h2>
+<p style="margin-top: 1% ;">Multi-Armed Bandits introduction</p>
+<h3 style="margin-bottom: 0%;">1. Decision making under uncertainty</h3>
+<p style="margin-top: 1% ;">Let’s say you walk into a coffee house you have never been to. Think about the process of choosing what flavour of coffee to order. As you have no prior information about how different flavors of coffee taste like (at this coffee house), there is no real advantage of choosing one flavor over another. <span style="font-style: italic;"> This process of making decisions with little (or no) prior information about the outcomes of known actions is termed as “Decision making under uncertainty.”</span> <span class="tooltip" style="color: blue;">[1]<span class="tooltiptext">Decision Making Under Uncertainty (Theory and Application)<a style="color: orange; text-decoration: none;" href = 'https://mitpress.mit.edu/books/decision-making-under-uncertainty' target="_blank"> visit</a>.</span></p>
+
+<p style="margin-top: 1% ;">This means choosing any flavour of coffee would be a new experience. In other words, called <span style="font-weight: bold;">exploring</span> coffee flavors. However, this might result in a bad choice (what if you ordered a flavour and didn’t like it at all?). At this point you decide turn to the ever so friendly waiter and try to gather some information about the coffee flavors (collecting <span style="font-weight: bold;">data</span> to make a decision). The waiter replies “Flavour A is the most-liked. You might like it the best”. In other words, Flavour A is a <span style="font-weight: bold;">prediction</span> based on previous customer feedback (data) and not a decision. You proceed with the suggestion of waiter and decide to order flavour A. In other words, you decided to <span style="font-weight: bold;">exploit</span> the prior information and made a <span style="font-weight: bold;">greedy</span> decision. (These terms will start making sense soon as they are meant to set-up for terminology later.) Let’s say you really liked the Flavour A and return back to the coffee house after a couple of days. Think about the same process of choosing what to order. Do you go with your current best choice (Flavour A) or ‘explore’ more flavors? There might be a better flavour, you might not know.</p>
+
+<h3 style="margin-bottom: 0%;">2. MAB definition and applicability</h3>
+
+<p style="margin-top: 1% ;">The concept of decision making under uncertainty can be encountered across multiple domains. For example, when a new user arrives at a website, he is shown certain ads. The recommendation agent (displaying the ads) is aimed at picking an ad that would maximize the click through rate. (CTR)</p>
+
+<div style="text-align: center;"> $\begin{align} \text{CTR} =\frac{\text{Number of clicks}}{\text{Total number of impressions}}\end{align}$/</div>
+
+<p><span style="font-weight: bold;">Dynamic Pricing:</span> Adjusting prices w.r.t. time to maximize sales. Using the best possible promotion strategies to maximize the sales. This category falls under Trade Promotion Optimization. For example, would $10 lead to more sales or $9.99 lead to more sales? What dates are the best to reduce (or) increase prices to maximize sales while minimizing promotional cost?</p>
+
+<p><span style="font-weight: bold;">Investment:</span> What the best combination of stocks to invest in and in what ratio? This falls into the category of Portfolio Optimization/Management. The agent must dynamically adjust the weights of each stock to yield maximum overall returns.</p>
+
+<p style="margin-top: 1%; margin-bottom: 1%;">Multi-armed bandits unify these examples by providing a simple but very powerful framework of algorithms that make decision over time under uncertainty. (cite google paper). In  the basic version, MAB algorithm has K possible actions to choose from, a.k.a. arms, and T rounds. In each round the algorithm chooses an arm and collects a reward for this arm. The reward is drawn independently from some distribution which is fixed but not known to the algorithm. Essentially, the goal of the solution is to maximize the overall reward (by choosing from K possible actions) in the least amount of rounds.</p>
+
+<table style="margin-top: 1%;">
+  <tr>
+    <th>Definition 1: <span style="font-weight:normal;">Stochastic Bandits (Simplified Multi-Armed Bandits)</span></th>
+  </tr>
+  <tr>
+    <td><span style="font-weight:bold;">Parameters: </span>K arms, T rounds (both known); reward distribution $\mathcal{D}_a$/ for each arm $a$/ (unknown).<br>
+    In each round $t \in [T]$/: <br>
+    1. Algorithm picks some arm $a_t$/. <br>
+    2. Reward $r_t \in [0,1]$/ is sampled independently from distribution $\mathcal{D}_a, \enspace a = a_t$/. <br>
+    3. Algorithm collects reward $r_t$/, and observes nothing else.
+    </td>
+  </tr>
+</table>
+
+<p style="font-weight:bold; margin-bottom: 0%;">2.1. Diving deep into MAB:</p>
+
+<p style="margin-top: 1%; margin-bottom: 1%; padding-bottom: 0%;">Having formulated a formal definition for the basic version of MAB, let’s understand the characteristics of an MAB problem and the reasons that make MAB a difficult problem to solve.</p>
+
+<p style="margin-top: 1%;">Imagine you walk into a casino and see two slot machines in front of you. For the sake of simplicity, let’s assume each slots yields either a reward of $0 or $1. How would one choose between these casinos. At this point there no real advantage of choosing one slot machine over the other because of no prior information. This makes any choice equivalent.</p>
+
+<p style="margin-top: 1%;">Let’s assume, you chose slot 1 and lost. At this point we have some information about slot 1 but have no information about slot 2. Think about which slot machine would you pick in the second try and why? Our gut says to pick slot 2 right? This is partly because of probability.</p>
+
+<div style="text-align: center;"> $\begin{align} \text{P(success)} =\frac{\text{Number of successful events}}{\text{Total number of events}}\end{align}$/</div>
+
+<p style="margin-top: 1%;">For slot 1 $\rightarrow \enspace P(s) = 0$/ </p>
+<p style="margin-top: 1%;">For slot 2 $\rightarrow \enspace P(s) = \text{undefined}$/ </p>
+
+<p style="margin-top: 1%; margin-bottom: 1%;">Our gut says that somehow 'undefined' is better than 0 and we want to explore the other slot machine, although you cannot compare them numerically. Let’s say you picked slot 2 and won. Which one do we play next? We would pick slot 2 as  P(2) =1 and P(1) = 0. In terms of probability, these estimates are what we call <span style="font-weight: bold;">Maximum likelihood estimates</span> and the process of picking the slot machine with maximum likelihood is called <span style="font-weight: bold;">Greedy approach</span>.</p>
+
+<p style="font-weight:bold; margin-bottom: 0%;">2.2. Statistical approach towards choosing slot machines:</p>
+
+<p style="margin-top: 1%; margin-bottom: 1%;">Let's take a step back and think if there is something wrong in choosing slots using the greedy method. Consider we played slot machine 2 ten times and we got only 1 reward. At this point P(2) is slightly greater than 0 while P(1) is still 0. Hence, there would be more disagreement about which slot machines to choose. What is the intuition behind choosing a slot machine even if the probability estimates suggest otherwise? Is there a way to algorithmically model this intuition?</p>
+
+<p style="margin-top: 1%; margin-bottom: 1%;">A statistician would suggest that the <span style="font-weight: bold;">correct</span> way to approach the slot machines is to decide how many data points to collect before walking into the casino. This would help decide the <a style ="color: blue;text-decoration: none;" href="https://machinelearningmastery.com/statistical-power-and-power-analysis-in-python/#:~:text=statistical%20power%20is%20the%20probability%20that%20a%20test,reject%20a%20false%20null%20hypothesis.&text=The%20higher%20the%20statistical%20power,when%20there%20is%20an%20effect." target="_blank">statistical power</a> and the <a style ="color: blue;text-decoration: none;" href="https://en.wikipedia.org/wiki/Effect_size#:~:text=In%20statistics%2C%20an%20effect%20size,based%20estimate%20of%20that%20quantity.&text=Effect%20sizes%20complement%20statistical%20hypothesis,%2C%20and%20in%20meta%2Danalyses." target="_blank">effect size</a> of the experiment. However, one major question here is that ‘How do you know the effect size without playing the machines?’</p>
+
+<p style="margin-top: 1%; margin-bottom: 1%;">Let’s say you decided to play each machine 10000 times. After 5000 pulls, slot machine 1 has won 3 times and slot machine 2 won 4000 times, but you cannot stop the experiment and play each slot 10,000 times. This would result in the loss of several coins just to understand the reward approximation by slot machines. This is the major reason why statistical testing cannot be used to solve the MAB problem.</p>
+
+<p style="margin-top: 1%; margin-bottom: 1%;"><span style="font-weight:bold;">2.3. Adaptation</span></p> 
+
+<p style="margin-top: 1%; margin-bottom: 1%;">We need to formulate an algorithm that can adapt to the recent findings (just like our intuition). In the subsequent sections, a mathematical explanation and an algorithmic implementation of this intuition will be explained.</p>
+
+<p style="margin-top: 1%; margin-bottom: 1%;">While modelling this intuition, we have two opposing forces (kind of):</p>
+
+<p style="margin: 1%;">1. To be a good statistician and collect as much data as possible (exploration)</p>
+  
+<p style="margin: 1%;">2. Pick the machine with highest probability estimate (exploitation)</p>
+
+<p style="margin: 1%;">As these two forces oppose each other, we call this as the explore-exploit dilemma.</p>
+
+<h3 style="margin-bottom: 0%;">3. Solutions</h3>
+
+<p style="margin-top: 1%; margin-bottom: 1%;">Rest of this article deals about ways to overcome this explore-exploit dilemma using several algorithms including:</p>
+
+<p style="margin: 1%;">1. Epsilon-greedy method</p>
+  
+<p style="margin: 1%;">2. Optimistic Initial Values</p>
+
+<p style="margin: 1%;">3. UCB1</p>
+
+<p style="margin: 1%;">4. Thompson Sampling (Bayesian Bandit)</p>
+ 
 
 
-<div class="definition"> A number $n$ is called even if $n\%2 = 0$. An odd number $m$ is odd if $m \%2 \neq 0$. Futhermore lets write an $m$ as $m=2q+1$ and $n$ = $n = 2p$ for $p,q\in \mathbb{R}$</div>
+
+<p><p></p></p>
+
+
+<!-- <div class="definition"> A number $n$ is called even if $n\%2 = 0$. An odd number $m$ is odd if $m \%2 \neq 0$. Futhermore lets write an $m$ as $m=2q+1$ and $n$ = $n = 2p$ for $p,q\in \mathbb{R}$</div>
 
 <div class="definition"> A number $n$ is called even if $n\%2 = 0$. An odd number $m$ is odd if $m \%2 \neq 0$. Futhermore lets write an $m$ as $m=2q+1$ and $n$ = $n = 2p$ for $p,q\in \mathbb{R}$</div>
 <p>In order to prove the next theorem we will need the next Lemma which we will not prove.</p>
@@ -84,12 +165,12 @@ $(document).ready(function () {
 <p>We can now come to our theorem.</p>
 <div class="theorem"> The sum of an odd number $m$ and an even number $n$ is always odd. </div>
 
-<div style="text-align: center;"> $\begin{align} \sum_{n=1}^N P(X=x) \end{align}$</div>
+<div style="text-align: center;"> $ \sum_{n=1}^N P(X=x) $</div> -->
 
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
-  tex2jax: {inlineMath: [['$','$']]}
+  tex2jax: {inlineMath: [['\$','$/']]}
 });
 </script>
 
