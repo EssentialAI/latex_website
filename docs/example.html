@@ -2,21 +2,116 @@
 <html>
 <head><meta charset="utf-8"><title>Example</title> <link rel="stylesheet" type="text/css" href="latex.css"></head>
 <body>
-<center class = 'no-print'><div style="margin: 0%;"><a href="example.html"><img width="270" height="270" src="lightmode.svg" alt="" style="border-radius: 5%;"></a></div></center>
-<h2 class = 'no-print'  style="text-align: center; margin: 0%; padding: 0;">Learn AI, the Math way</h2>
-<hr class = 'no-print'>
-<h1 style="margin-bottom:0%; text-align: left; font-size: 34px;">Reinforcement Learning for Machine Scheduling.</h1>
-<!-- <p class="author">1.1.2020 - Example</p> -->
-<p>consectetur adipiscing elit. Praesent blandit mollis scelerisque. Phasellus non scelerisque purus. Aliquam <strong>quis</strong> dapibus tortor, id laoreet augue. Curabitur lobortis lorem eget placerat mollis. Suspendisse sodales consequat justo, vitae molestie odio. Donec efficitur odio vitae sem condimentum viverra. <em>Nullam a auctor dolor. Sed aliquet ipsum non blandit placerat.</em> Donec auctor velit et eros volutpat sodales.</p>
-<h2>Donec nunc justo</h2>
-<p>placerat feugiat libero id, mollis efficitur purus. Morbi non vulputate augue. Proin a tempus diam. Curabitur eros turpis, aliquam ac ullamcorper sit amet, egestas aliquam enim. Curabitur nulla sem, placerat sed purus vitae, interdum tincidunt elit. Duis lectus mauris, luctus eu dui vitae, pellentesque finibus velit. Nam sit amet ipsum feugiat, egestas dui eu, convallis sem.</p>
-<h3><a id="Nunc_sed_leo_vel_6"></a>Nunc sed leo vel</h3>
-<p>sapien dapibus tristique. Duis pharetra, quam sit amet dictum rhoncus, quam felis dignissim nisl, eu egestas leo nisl at nisi. Mauris ac augue eget purus convallis lacinia non at urna. Nam pellentesque urna magna, et congue massa viverra ac. In rutrum nisl quam, suscipit commodo arcu viverra pretium. Nam non cursus diam. Etiam sagittis massa lorem, in tempus risus malesuada nec. Etiam sit amet lectus dui.</p>
-<h3><a id="Proin_laoreet_pulvinar_urna_9"></a>Proin laoreet pulvinar urna</h3>
-<p>in gravida quam ornare in. Nullam congue eget quam sit amet porta. Phasellus interdum gravida libero in finibus. Fusce facilisis mi ac nibh feugiat scelerisque. Nunc ut felis ipsum. Donec turpis elit, dignissim vitae maximus vulputate, auctor at leo. Vivamus vel neque at tortor maximus condimentum. Curabitur consequat lobortis risus. Donec pretium vitae dui vel elementum. Fusce non ante a augue dictum malesuada non vel sapien. Proin sed sagittis ligula.</p>
-<h2><a id="Duis_lacinia_neque_12"></a>Duis lacinia neque</h2>
-<p>eu pulvinar vulputate. Quisque faucibus maximus enim ut facilisis. Donec sem libero, pharetra ut mauris interdum, convallis congue massa. Proin at diam sollicitudin, mollis tellus vitae, blandit leo. Proin pretium nisi ex, luctus vulputate urna lobortis sit amet. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur quis ante eros. Aenean rutrum nisi nec metus laoreet vestibulum non eu sem. Donec dui metus, tempus et varius eget, imperdiet id dui. Quisque ut neque scelerisque, vehicula lorem id, faucibus risus. Nam finibus tellus sem, id lobortis neque volutpat non. Aenean eu metus urna. Ut eu mollis ligula, sed eleifend ex. Sed ac diam sit amet eros rutrum dictum quis id lorem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis elementum suscipit dolor, quis tempor sem dictum quis.</p>
-<p>Suspendisse interdum massa ut felis mattis blandit. Nunc et convallis elit. Nunc vehicula viverra mauris, non facilisis massa finibus sit amet. Nulla facilisi. Donec vel nisl lacinia, varius mi a, rutrum lectus. Suspendisse ipsum felis, ultricies at facilisis quis, ullamcorper sit amet sem. Fusce consequat ornare nisl, ac posuere mauris. Aliquam in tempus orci.</p>
-<p>Integer quis sapien ante. Mauris id ultrices urna. Donec euismod imperdiet justo, ac blandit urna facilisis vel. Aliquam eleifend egestas sapien, in sollicitudin ex tristique ut. Sed ut neque urna. In consequat dui non auctor efficitur. Nunc est est, semper et purus sit amet, hendrerit efficitur sapien. Vestibulum quis luctus sem. Sed erat purus, interdum nec quam non, placerat fermentum neque.</p>
+    <div class="fluid-row" id="header">
+        <center class = 'no-print'><div style="margin: 0%;"><a href="example.html"><img width="250" height="250" src="logo_final1.svg" alt="" style="margin-top: 2%;"></a></div></center>
+      
+      <h2 class="no-print" style="text-align: center; margin: 0%; padding: 0;">Learn AI, the Math way.</h2>
+      <div class='no-print' style="text-align: center;"><a href="about.html"
+        class ='links' >About</a> | <a href="research.html" class = 'links'>Research</a> | <a href="archive.html" class = 'links'>Archive</a> | <a href="https://www.github.com/EssentialAI" class = 'links' target="_blank">Code</a></div>
+        <hr>
+      </div>
+      <div class = 'no-print' style="margin: 0%;"><button onclick="window.print();return false;">Export as PDF</button></div>
+      <h2 style="margin-bottom: 0%; margin-top: 1%;">Multi-Armed Bandits problem and solutions</h2>
+      <p style="margin-top: 1% ;">Multi-Armed Bandits (MAB) is a simple but very powerful framework for algorithms that make decisions over time under uncertainty. This article discusses the MAB framework in detail starting with ‘Decision making under uncertainty’ to the ‘characteristics and applicability of MAB framework’. The subsequent sections of this article deal with a simplified version of MAB (Stochastic Bandits), the caveats of a statistical approach towards MAB problem, and the need for an adaptive solution. The final sections of this article deal with solutions to the MAB problem by providing a comprehensive mathematical intuition and algorithmic formulation of these solutions.</p>
+      <h3 style="margin: 0%;">1. Introduction</h3>
+      <p style="font-weight: bold;margin-top: 1%;margin-bottom: 1%;"><span style="font-style: italic;">Scenario 1: (Understanding decision making under uncertainty).</span></p>
+      <p style="margin-top: 1% ;">To properly understand the concept of decision making under uncertainty, let's assume a simple scenario. Assume you walk into a coffee house you have never been to. Think about the process of choosing what flavour of coffee to order. As you have no prior information about how different flavors of coffee taste like (at this coffee house), there is no real advantage of choosing one flavor over another. <span style="font-style: italic;"> This process of making decisions with little (or no) prior information about the outcomes of known actions is termed as “Decision making under uncertainty.”</span> <span class="tooltip" style="color: blue;">[1]<span class="tooltiptext">Decision Making Under Uncertainty (Theory and Application)<a style="color: orange; text-decoration: none;" href = 'https://mitpress.mit.edu/books/decision-making-under-uncertainty' target="_blank"> visit</a>.</span></p>
+      
+      <p style="margin-top: 1% ;">This means choosing any flavour of coffee would be a new experience. In other words, called <span style="font-weight: bold;">exploring</span> coffee flavors. However, this might result in a bad choice (what if you ordered a flavour and didn’t like it at all?). At this point you decide turn to the ever so friendly waiter and try to gather some information about the coffee flavors (collecting <span style="font-weight: bold;">data</span> to make a decision). The waiter replies “Flavour A is the most-liked. You might like it the best”. In other words, Flavour A is a <span style="font-weight: bold;">prediction</span> based on previous customer feedback (data) and not a decision. You proceed with the suggestion of waiter and decide to order flavour A. In other words, you decided to <span style="font-weight: bold;">exploit</span> the prior information and made a <span style="font-weight: bold;">greedy</span> decision. (These terms will start making sense soon as they are meant to set-up for terminology later.) Let’s say you really liked the Flavour A and return back to the coffee house after a couple of days. Think about the same process of choosing what to order. Do you go with your current best choice (Flavour A) or ‘explore’ more flavors? There might be a better flavour, you might not know!</p>
+      
+      <p style="font-weight: bold;margin-top: 1%;margin-bottom: 1%;"><span style="font-style: italic;">Applicability of decision making under uncertainty:</span></p>
+      
+      <p style="margin-top: 1% ;">The above concept of decision making under uncertainty can be encountered across multiple domains. For example, when a new user arrives at a website, he is shown certain ads. The recommendation agent (displaying the ads) is aimed at picking an ad that would maximize the click through rate. (CTR)</p>
+      
+      <div style="text-align: center;"> $\begin{align} \text{CTR} =\frac{\text{Number of clicks}}{\text{Total number of impressions}}\end{align}$/</div>
+      
+      <p style="margin-bottom: 1%;"><span style="font-weight: bold;">Dynamic Pricing:</span> Fast-moving Consumer Goods (FMCG) is a domain with a large quantity of perishable goods. A seller must understand the change in demand for such products at regular intervals and adjust prices to maximize sales every day. This is an interesting problem from the seller point of view as there would be limited prior information to find the best possible promotion strategy to maximize the sales. This category falls under Trade Promotion Optimization. For example, would $9.99 lead to more sales than $10? What dates are the best to reduce (or) increase prices to maximize sales while minimizing promotional cost?</p>
+      
+      <p style="margin-bottom: 1%;"><span style="font-weight: bold;">Portfolio Optimization:</span> Portfolio optimization is based on Modern Portfolio Theory (MPT). The MPT is based on the principle that investors want the highest return for the lowest risk. To achieve this, assets in a portfolio should be selected after considering how they perform relative to each other, i.e.; they should have a low correlation. The agent must dynamically adjust the weights of each stock to yield maximum overall returns by choosing the best combination of stocks to be invested.</p>
+      
+      <h3 style="margin-bottom: 0%;">2. MAB definition and applicability</h3>
+      
+      <p style="margin-top: 1%; margin-bottom: 1%;">Multi-armed bandits unify these examples by providing a simple but very powerful framework of algorithms that make decision over time under uncertainty. (cite google paper). In  the basic version, MAB algorithm has K possible actions to choose from, a.k.a. arms, and T rounds. In each round the algorithm chooses an arm and collects a reward for this arm. The reward is drawn independently from some distribution which is fixed but not known to the algorithm. Essentially, the goal of the solution is to maximize the overall reward (by choosing from K possible actions) in the least amount of rounds.</p>
+      
+      <table style="margin-top: 1%;">
+        <tr>
+          <th>Definition: <span style="font-weight:normal;">Stochastic Bandits (Simplified Multi-Armed Bandits)</span></th>
+        </tr>
+        <tr>
+          <td><span style="font-weight:bold;">Parameters: </span>K arms, T rounds (both known); reward distribution $\mathcal{D}_a$/ for each arm $a$/ (unknown).<br>
+          In each round $t \in [T]$/: <br>
+          1. Algorithm picks some arm $a_t$/. <br>
+          2. Reward $r_t \in [0,1]$/ is sampled independently from distribution $\mathcal{D}_a, \enspace a = a_t$/. <br>
+          3. Algorithm collects reward $r_t$/, and observes nothing else.
+          </td>
+        </tr>
+      </table>
+      
+      <p style="font-weight:bold; margin-bottom: 0%;">2.1. Diving deep into MAB:</p>
+      
+      <p style="margin-top: 1%; margin-bottom: 1%; padding-bottom: 0%;">Having formulated a formal definition for the basic version of MAB, let’s understand the characteristics of an MAB problem and the reasons that make MAB a difficult problem to solve.</p>
+      <p style="font-weight: bold;margin-top: 1%;margin-bottom: 1%;"><span style="font-style: italic;">Scenario 2: Explaining the intuition behind decision making under uncertainty.</span></p>
+      <p style="margin-top: 1%;">Imagine you walk into a casino and see two slot machines in front of you. For the sake of simplicity, let’s assume each slot machine yields either a reward of $0 or $1. How would one choose between these slot machines? At this point there no real advantage of choosing one slot machine over the other because of no prior information. This makes any choice equivalent.</p>
+      
+      <p style="margin-top: 1%;">Let’s assume, you chose slot 1 and lost. At this point we have some information about slot 1 but have no information about slot 2. Think about which slot machine would you pick in the second try and why? Our gut says to pick slot 2 right? This is partly because of probability.</p>
+      
+      <div style="text-align: center;"> $\begin{align} \text{P(success)} =\frac{\text{Number of successful events}}{\text{Total number of events}}\end{align}$/</div>
+      
+      <p style="margin-top: 1%;">For slot 1 $\rightarrow \enspace P(s) = 0$/ </p>
+      <p style="margin-top: 1%;">For slot 2 $\rightarrow \enspace P(s) = \text{undefined}$/ </p>
+      
+      <p style="margin-top: 1%; margin-bottom: 1%;">Our gut says that somehow 'undefined' is better than 0 and we want to explore the other slot machine, although you cannot compare them numerically. Let’s say you picked slot 2 and won. Which one do we play next? We would pick slot 2, as  P(2) =1 and P(1) = 0. In terms of probability, these estimates are what we call <span style="font-weight: bold;">Maximum likelihood estimates</span> and the process of picking the slot machine with maximum likelihood is called <span style="font-weight: bold;">Greedy approach</span>.</p>
+      
+      <p style="font-weight:bold; margin-bottom: 0%;">2.2. Statistical approach towards choosing slot machines:</p>
+      
+      <p style="margin-top: 1%; margin-bottom: 1%;">Let's take a step back and think if there is something wrong in choosing slots using the greedy method. Consider we played slot machine 2 ten times and we got only 1 reward. At this point P(2) is slightly greater than 0 while P(1) is still 0. At this point there would be more disagreement about which slot machine to choose. What is the intuition behind choosing a slot machine even if the probability estimates suggest otherwise? Is there a way to algorithmically model this intuition?</p>
+      
+      <p style="margin-top: 1%; margin-bottom: 1%;">A statistician would suggest that the <span style="font-weight: bold;">correct</span> way to approach the slot machines is to decide how many data points to collect before walking into the casino. This would help decide the <a style ="color: blue;text-decoration: none;" href="https://machinelearningmastery.com/statistical-power-and-power-analysis-in-python/#:~:text=statistical%20power%20is%20the%20probability%20that%20a%20test,reject%20a%20false%20null%20hypothesis.&text=The%20higher%20the%20statistical%20power,when%20there%20is%20an%20effect." target="_blank">statistical power</a> and the <a style ="color: blue;text-decoration: none;" href="https://en.wikipedia.org/wiki/Effect_size#:~:text=In%20statistics%2C%20an%20effect%20size,based%20estimate%20of%20that%20quantity.&text=Effect%20sizes%20complement%20statistical%20hypothesis,%2C%20and%20in%20meta%2Danalyses." target="_blank">effect size</a> of the experiment. However, one major question here is that ‘How do you know the effect size without playing the machines?’</p>
+      
+      <p style="margin-top: 1%; margin-bottom: 1%;">Let’s say you decided to play each machine 10000 times. After 5000 pulls, slot machine 1 has won 3 times and slot machine 2 won 4000 times, but you cannot stop the experiment as it would invalidate the results from a statistical point of view. We must play each slot 10,000 times. This would result in the loss of several coins just to understand the reward approximation by slot machines. This is the major reason why statistical testing cannot be used to solve the MAB problem.</p>
+      
+      <p style="margin-bottom: 1%;"><span style="font-weight:bold;">2.3. Adaptation</span></p> 
+      
+      <p style="margin-top: 1%; margin-bottom: 1%;">We need to formulate an algorithm that can adapt to the recent findings (just like our intuition). In the subsequent sections, a mathematical explanation and an algorithmic implementation of this intuition will be explained.</p>
+      
+      <p style="margin-top: 1%; margin-bottom: 1%;">While modelling this intuition, we have two opposing forces:</p>
+      
+      <p style="margin: 1%;">1. To be a good statistician and collect as much data as possible (exploration)</p>
+        
+      <p style="margin: 1%;">2. Pick the machine with highest probability estimate (exploitation)</p>
+      
+      <p style="margin-top: 1%;">These two forces of exploration and exploitation oppose each other. We want to achieve maximum reward while picking the slot machines, yet we cannot calculate their true probability estimates without exploring. Everytime we explore a sub-optimal slot machine, we sacrifice the best reward for better accuracy in probability estimates. Hence, exploration and exploitation are at odds with each other and cause a dilemma while making a decision. This is called the <span style="font-weight: bold;">explore-exploit dilemma.</span></p>
+      
+      <h3 style="margin-bottom: 0%;">3. Solutions</h3>
+      
+      <p style="margin-top: 1%; margin-bottom: 1%;">Rest of this article deals about ways to overcome this explore-exploit dilemma, while solving the MAB problem, using several algorithms such as:</p>
+      
+      <p style="margin: 1%;">1. Epsilon-greedy method</p>
+        
+      <p style="margin: 1%;">2. Optimistic Initial Values</p>
+      
+      <p style="margin: 1%;">3. UCB1</p>
+      
+      <p style="margin: 1%;">4. Thompson Sampling (Bayesian Bandit)</p>
+       
+      
+      
+      
+      <p><p></p></p>
+      <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['\$','$/']]}
+        });
+        </script>
+        
+        <!-- dynamically load mathjax for compatibility with self-contained -->
+        <script>
+          (function () {
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+            document.getElementsByTagName("head")[0].appendChild(script);
+          })();
+        </script>
 
 </body></html>
